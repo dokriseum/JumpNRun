@@ -34,6 +34,6 @@ cmake_install.cmake
 Thumbs.db
 
 # Ignoriere eingebettete Header-Dateien (falls nicht gewollt im Repo)
-background.h
-player.h
-platform.h
+pic/background_img.h
+pic/player_img.h
+pic/platform_img.h
