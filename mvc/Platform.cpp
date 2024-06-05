@@ -2,7 +2,7 @@
 
 Platform::Platform(const sf::Texture& texture, float x, float y) {
     sprite.setTexture(texture);
-    sprite.setScale(0.2f, 0.2f);  // Passe die Größe der Plattform an
+    sprite.setScale(1.5f, 0.2f);  // Passe die Größe der Plattform an (breiter)
     sprite.setPosition(x, y);
 }
 

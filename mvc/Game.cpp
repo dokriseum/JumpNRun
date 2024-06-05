@@ -78,8 +78,8 @@ void Game::loadResources() {
 }
 
 void Game::createPlatforms() {
-    platforms.push_back(Platform(platformTexture, 300.f, 500.f));
-    platforms.push_back(Platform(platformTexture, 450.f, 400.f));
-    platforms.push_back(Platform(platformTexture, 200.f, 300.f));
-    platforms.push_back(Platform(platformTexture, 600.f, 200.f));
+    platforms.push_back(Platform(platformTexture, 150.f, 500.f));
+    platforms.push_back(Platform(platformTexture, 50.f, 400.f));
+    platforms.push_back(Platform(platformTexture, 250.f, 300.f));
+    platforms.push_back(Platform(platformTexture, 100.f, 200.f));
 }

@@ -78,13 +78,14 @@ private:
     sf::Sprite sprite; ///< Der Sprite des Spielers
     sf::Vector2f velocity; ///< Die Geschwindigkeit des Spielers
 
-    const float gravity = 0.5f; ///< Die Schwerkraft, die auf den Spieler wirkt
-    const float jumpPower = -10.f; ///< Die Sprungkraft des Spielers
-    const float playerSpeed = 300.f; ///< Die Bewegungsgeschwindigkeit des Spielers in Pixeln pro Sekunde
+    const float gravity = 980.f; ///< Die Schwerkraft, die auf den Spieler wirkt (in Pixeln pro Sekunde^2)
+    const float jumpPower = -400.f; ///< Die Sprungkraft des Spielers (in Pixeln pro Sekunde)
+    const float playerSpeed = 150.f; ///< Die Bewegungsgeschwindigkeit des Spielers in Pixeln pro Sekunde
 
     bool movingLeft; ///< Bewegt sich der Spieler nach links
     bool movingRight; ///< Bewegt sich der Spieler nach rechts
     bool jumping; ///< Springt der Spieler
+    bool canJump; ///< Kann der Spieler springen
 };
 
 #endif // PLAYER_H

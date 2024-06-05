@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player(const sf::Texture& texture)
-        : movingLeft(false), movingRight(false), jumping(false) {
+        : movingLeft(false), movingRight(false), jumping(false), canJump(true) {
     sprite.setTexture(texture);
     sprite.setScale(0.1f, 0.1f);  // Passe die Größe des Spielers an
 }
@@ -15,9 +15,10 @@ void Player::handleInput(const sf::Event& event) {
             movingRight = true;
         }
         if (event.key.code == sf::Keyboard::Space) {
-            if (!jumping) {
+            if (!jumping && canJump) {
                 velocity.y = jumpPower;
                 jumping = true;
+                canJump = false;
             }
         }
     } else if (event.type == sf::Event::KeyReleased) {
@@ -26,6 +27,9 @@ void Player::handleInput(const sf::Event& event) {
         }
         if (event.key.code == sf::Keyboard::Right) {
             movingRight = false;
+        }
+        if (event.key.code == sf::Keyboard::Space) {
+            canJump = true;
         }
     }
 }
@@ -38,8 +42,8 @@ void Player::update(sf::Time deltaTime) {
         sprite.move(playerSpeed * deltaTime.asSeconds(), 0);
     }
 
-    velocity.y += gravity;
-    sprite.move(0, velocity.y);
+    velocity.y += gravity * deltaTime.asSeconds();
+    sprite.move(0, velocity.y * deltaTime.asSeconds());
 
     if (sprite.getPosition().x < 0) {
         sprite.setPosition(0, sprite.getPosition().y);
