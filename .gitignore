@@ -1,0 +1,39 @@
+# Ignoriere Build-Ordner
+build/
+cmake-build-*/
+
+# Ignoriere CMake-Cache-Dateien
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+#Makefile
+
+# Ignoriere VSCode-Dateien (optional)
+.vscode/
+
+# Ignoriere CLion-Projektdateien
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Ignoriere automatisch generierte Dateien
+*.o
+*.obj
+*.log
+*.swp
+*.class
+*.dll
+*.exe
+*.out
+*.so
+*.dylib
+
+# Ignoriere system-spezifische Dateien
+.DS_Store
+Thumbs.db
+
+# Ignoriere eingebettete Header-Dateien (falls nicht gewollt im Repo)
+background.h
+player.h
+platform.h
