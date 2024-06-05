@@ -20,9 +20,9 @@ Game::Game()
 void Game::run() {
     sf::Clock clock;
     while (window.isOpen()) {
-        sf::Time dt = clock.restart();
+        sf::Time deltaTime = clock.restart();
         processEvents();
-        update();
+        update(deltaTime);
         render();
     }
 }
@@ -38,8 +38,8 @@ void Game::processEvents() {
     }
 }
 
-void Game::update() {
-    player->update();
+void Game::update(sf::Time deltaTime) {
+    player->update(deltaTime);
 
     for (auto& platform : platforms) {
         if (player->getBounds().intersects(platform.getBounds()) && player->getBounds().top < platform.getBounds().top) {

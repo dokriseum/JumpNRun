@@ -30,12 +30,12 @@ void Player::handleInput(const sf::Event& event) {
     }
 }
 
-void Player::update() {
+void Player::update(sf::Time deltaTime) {
     if (movingLeft) {
-        sprite.move(-playerSpeed, 0);
+        sprite.move(-playerSpeed * deltaTime.asSeconds(), 0);
     }
     if (movingRight) {
-        sprite.move(playerSpeed, 0);
+        sprite.move(playerSpeed * deltaTime.asSeconds(), 0);
     }
 
     velocity.y += gravity;

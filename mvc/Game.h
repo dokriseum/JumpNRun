@@ -34,8 +34,9 @@ private:
     /**
      * @brief Aktualisiert den Zustand des Spiels
      *
+     * @param deltaTime Die verstrichene Zeit seit dem letzten Frame
      */
-    void update();
+    void update(sf::Time deltaTime);
 
     /**
      * @brief Rendert das Spiel auf dem Fenster

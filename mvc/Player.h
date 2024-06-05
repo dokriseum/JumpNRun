@@ -26,8 +26,9 @@ public:
     /**
      * @brief Aktualisiert die Position und den Zustand des Spielers
      *
+     * @param deltaTime Die verstrichene Zeit seit dem letzten Frame
      */
-    void update();
+    void update(sf::Time deltaTime);
 
     /**
      * @brief Zeichnet den Spieler auf das Fenster
@@ -79,7 +80,7 @@ private:
 
     const float gravity = 0.5f; ///< Die Schwerkraft, die auf den Spieler wirkt
     const float jumpPower = -10.f; ///< Die Sprungkraft des Spielers
-    const float playerSpeed = 3.f; ///< Die Bewegungsgeschwindigkeit des Spielers
+    const float playerSpeed = 300.f; ///< Die Bewegungsgeschwindigkeit des Spielers in Pixeln pro Sekunde
 
     bool movingLeft; ///< Bewegt sich der Spieler nach links
     bool movingRight; ///< Bewegt sich der Spieler nach rechts
