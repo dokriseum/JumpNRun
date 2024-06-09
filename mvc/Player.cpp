@@ -51,11 +51,6 @@ void Player::update(sf::Time deltaTime) {
     if (sprite.getPosition().x > 800 - sprite.getGlobalBounds().width) {
         sprite.setPosition(800 - sprite.getGlobalBounds().width, sprite.getPosition().y);
     }
-    if (sprite.getPosition().y > 600 - sprite.getGlobalBounds().height) {
-        sprite.setPosition(sprite.getPosition().x, 600 - sprite.getGlobalBounds().height);
-        velocity.y = 0;
-        jumping = false;
-    }
 }
 
 void Player::draw(sf::RenderWindow& window) {
@@ -80,4 +75,8 @@ bool Player::isJumping() const {
 
 void Player::setJumping(bool jump) {
     jumping = jump;
+}
+
+sf::Vector2f Player::getPosition() const {
+    return sprite.getPosition();
 }

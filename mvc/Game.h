@@ -56,6 +56,12 @@ private:
      */
     void createPlatforms();
 
+    /**
+     * @brief Generiert eine neue Plattform an einer zufälligen Position
+     *
+     */
+    void generatePlatform();
+
     sf::RenderWindow window; ///< Das Hauptfenster des Spiels
     sf::Texture backgroundTexture; ///< Die Textur für den Hintergrund
     sf::Texture playerTexture; ///< Die Textur für den Spieler
@@ -64,6 +70,11 @@ private:
 
     Player* player; ///< Zeiger auf den Spieler
     std::vector<Platform> platforms; ///< Vektor der Plattformen
+    int score; ///< Der aktuelle Punktestand
+
+    const float platformSpacing = 150.f; ///< Abstand zwischen den Plattformen
+    float scrollSpeed; ///< Die Geschwindigkeit des Bildlaufs
+    float scrollOffset; ///< Die aktuelle Bildlaufposition
 };
 
 #endif // GAME_H

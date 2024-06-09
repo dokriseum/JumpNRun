@@ -32,6 +32,22 @@ public:
      */
     sf::FloatRect getBounds() const;
 
+    /**
+     * @brief Setzt die Position der Plattform
+     *
+     * @param x Die X-Koordinate
+     * @param y Die Y-Koordinate
+     */
+    void setPosition(float x, float y);
+
+    /**
+     * @brief Bewegt die Plattform um eine bestimmte Anzahl von Pixeln
+     *
+     * @param dx Verschiebung in X-Richtung
+     * @param dy Verschiebung in Y-Richtung
+     */
+    void move(float dx, float dy);
+
 private:
     sf::Sprite sprite; ///< Der Sprite der Plattform
 };

@@ -74,6 +74,13 @@ public:
      */
     void setJumping(bool jump);
 
+    /**
+     * @brief Gibt die aktuelle Position des Spielers zurück
+     *
+     * @return sf::Vector2f Die aktuelle Position des Spielers
+     */
+    sf::Vector2f getPosition() const;
+
 private:
     sf::Sprite sprite; ///< Der Sprite des Spielers
     sf::Vector2f velocity; ///< Die Geschwindigkeit des Spielers

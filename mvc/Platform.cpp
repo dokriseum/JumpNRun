@@ -13,3 +13,11 @@ void Platform::draw(sf::RenderWindow& window) {
 sf::FloatRect Platform::getBounds() const {
     return sprite.getGlobalBounds();
 }
+
+void Platform::setPosition(float x, float y) {
+    sprite.setPosition(x, y);
+}
+
+void Platform::move(float dx, float dy) {
+    sprite.move(dx, dy);
+}

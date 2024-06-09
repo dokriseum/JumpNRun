@@ -1,11 +1,12 @@
 #include "Game.h"
 #include <iostream>
+#include <random>
 #include "pic/background.h"
 #include "pic/player.h"
 #include "pic/platform.h"
 
 Game::Game()
-        : window(sf::VideoMode(800, 600), "Jump'n'Run Spiel"), player(nullptr) {
+        : window(sf::VideoMode(800, 600), "Jump'n'Run Spiel"), player(nullptr), score(0), scrollSpeed(100.f), scrollOffset(0.f) {
     loadResources();
     createPlatforms();
     player = new Player(playerTexture);
@@ -41,13 +42,33 @@ void Game::processEvents() {
 void Game::update(sf::Time deltaTime) {
     player->update(deltaTime);
 
+    // Bewege die Plattformen nach unten und aktualisiere den Bildlauf
+    float moveDistance = scrollSpeed * deltaTime.asSeconds();
+    for (auto& platform : platforms) {
+        platform.move(0, moveDistance);
+    }
+    scrollOffset += moveDistance;
+
+    // Generiere neue Plattformen, wenn nötig
+    if (scrollOffset >= platformSpacing) {
+        generatePlatform();
+        scrollOffset = 0.f;
+    }
+
+    // Überprüfe Kollisionen und aktualisiere den Punktestand
     for (auto& platform : platforms) {
         if (player->getBounds().intersects(platform.getBounds()) && player->getBounds().top < platform.getBounds().top) {
             player->setPosition(player->getBounds().left, platform.getBounds().top - player->getBounds().height);
             player->setVelocityY(0);
             player->setJumping(false);  // Spieler ist nicht mehr im Sprung
+            score++;
         }
     }
+
+    // Entferne Plattformen, die außerhalb des Bildschirms sind
+    platforms.erase(std::remove_if(platforms.begin(), platforms.end(), [](Platform& p) {
+        return p.getBounds().top > 600;
+    }), platforms.end());
 }
 
 void Game::render() {
@@ -59,6 +80,17 @@ void Game::render() {
     }
 
     player->draw(window);
+
+    // Zeige den Punktestand an
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        // Fehlerbehandlung
+    }
+    sf::Text scoreText("Score: " + std::to_string(score), font, 24);
+    scoreText.setFillColor(sf::Color::Black);
+    scoreText.setPosition(10.f, 10.f);
+    window.draw(scoreText);
+
     window.display();
 }
 
@@ -78,8 +110,15 @@ void Game::loadResources() {
 }
 
 void Game::createPlatforms() {
-    platforms.push_back(Platform(platformTexture, 150.f, 500.f));
-    platforms.push_back(Platform(platformTexture, 50.f, 400.f));
-    platforms.push_back(Platform(platformTexture, 250.f, 300.f));
-    platforms.push_back(Platform(platformTexture, 100.f, 200.f));
+    for (int i = 0; i < 5; ++i) {
+        generatePlatform();
+    }
+}
+
+void Game::generatePlatform() {
+    static std::mt19937 rng(std::random_device{}());
+    std::uniform_real_distribution<float> distX(0.f, 800.f - platformTexture.getSize().x);
+    float x = distX(rng);
+    float y = platforms.empty() ? 500.f : platforms.back().getBounds().top - platformSpacing;
+    platforms.push_back(Platform(platformTexture, x, y));
 }
